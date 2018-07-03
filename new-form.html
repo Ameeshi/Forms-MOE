@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="req-form.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title> Requisitioning Form </title>
+
+    <script language="Javascript" >
+      function download(filename) {
+        var pom = document.createElement('a');
+
+        var items_list = "";
+        var rows = document.getElementById("tbl").getElementsByTagName("tr").length;
+        for (i = 1; i < rows; i++) {
+          items_list += '{ "requistionItemId": ' + document.getElementById("tbl").rows[i].cells[0].children[0].value +
+                        ', "itemDescription": ' + document.getElementById("tbl").rows[i].cells[1].children[0].value + 
+                        ', "quantity": ' +  document.getElementById("tbl").rows[i].cells[2].children[0].value + 
+                        ', "unit": ' + document.getElementById("tbl").rows[i].cells[3].children[0].value +
+                        ', "price": ' + document.getElementById("tbl").rows[i].cells[4].children[0].value + "}";
+
+        }
+
+        var text = '{ "requisitionID": ' + document.getElementById('reqid').value + 
+                   ', "vendorID": ' + document.getElementById('venid').value +
+                   ', "justification": ' + document.getElementById('justi').value + 
+                   ', "moeApprovedDate": ' + document.getElementById('appdate').value + 
+                   ', "items": [' + items_list;
+
+        pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+
+        pom.setAttribute('download', filename);
+
+        pom.style.display = 'none';
+        document.body.appendChild(pom);
+
+        pom.click();
+
+        document.body.removeChild(pom);
+      }
+
+    </script>
+
+  </head>
+  <body>
+
+    <div class="header">
+      <div class="header-left"><a href="#"> Requisitions</a></div>
+      <div class="header-right">
+        <a href="new-form.html">Add </a>
+        <a href="form.html">Edit </a>
+        <a href="list.html">List </a>
+      </div>
+    </div>
+
+    <form class="form-style-9" id = "MyForm" onsubmit="download(this['field1'].value)">
+    
+      <ul>
+        <li> 
+          <label for="reqid" class = "field-style field-split align-left">Requisition ID</label>
+          <label for="venid" class="field-style field-split align-right">Vendor ID</label>
+          <input type="text" name="field1" class = "field-style field-split align-left" id = "reqid"/>
+          <input type="text" name="field2" class="field-style field-split align-right" id ="venid"/>
+        </li>
+
+        <li>
+          <label for="justi" class = "field-style field-split align-left">Justification</label>
+          <label for="appdate" class="field-style field-split align-right">Approval Date</label>
+          <textarea name="field3" class="field-style field-split align-left" id = "justi" rows = "2"/></textarea>
+          <input type="date" name="field4" class="field-style field-split align-right" id = "appdate" />
+        </li>
+      </ul>
+
+      <div id = "items">
+      <script>
+        function copyRow() {
+          var html = $('#tbl tr:last').html();
+          $('#tbl tr:last').after("<tr>" + html + "</tr>");
+        }
+      </script>
+
+          
+      <table id = "tbl">
+        <tr>
+          <th> Item ID </th>
+          <th> Description </th>
+          <th> Quantity </th>
+          <th> Unit </th>
+          <th> Unit Price </th>
+          <th> Delete </th>
+        </tr>
+        <tr>
+          <td> <input type="text" id = "itemid"/> </td>
+          <td> <input type="text" id = "desc"/> </td>
+          <td> <input type="text" id = "quant"/> </td>
+          <td> <input type="text" id = "unit"/> </td>
+          <td> <input type="text" id = "price"/> </td>
+          <td> <input type="checkbox" id = "deletion"/> </td>
+        </tr>
+      </table> <br> 
+
+      <input id = "add" type ="button" onclick="copyRow();" value = "+" /> 
+
+      </div> <br> 
+
+      <input type="submit" value="Save to File" />
+
+    </form>
+
+  </body>
+</html>
