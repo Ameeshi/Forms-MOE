@@ -10,36 +10,41 @@
     <title> Requisitioning Form </title>
 
     <script language="Javascript" >
-      function download(filename) {
-        var pom = document.createElement('a');
+      
+      function save() {
 
-        var items_list = "";
-        var rows = document.getElementById("tbl").getElementsByTagName("tr").length;
-        for (i = 1; i < rows; i++) {
-          items_list += '{ "requistionItemId": ' + document.getElementById("tbl").rows[i].cells[0].children[0].value +
-                        ', "itemDescription": ' + document.getElementById("tbl").rows[i].cells[1].children[0].value + 
-                        ', "quantity": ' +  document.getElementById("tbl").rows[i].cells[2].children[0].value + 
-                        ', "unit": ' + document.getElementById("tbl").rows[i].cells[3].children[0].value +
-                        ', "price": ' + document.getElementById("tbl").rows[i].cells[4].children[0].value + "}";
+        var text = {};
 
+        inputs = document.getElementsByTagName('input');
+        for (i =0; i < inputs.length; i++) {
+          name = inputs[i].name;
+          text[name] = inputs[i].value;
         }
 
-        var text = '{ "requisitionID": ' + document.getElementById('reqid').value + 
-                   ', "vendorID": ' + document.getElementById('venid').value +
-                   ', "justification": ' + document.getElementById('justi').value + 
-                   ', "moeApprovedDate": ' + document.getElementById('appdate').value + 
-                   ', "items": [' + items_list;
+        // // alert(single_item);
+        // text["requisitionID"] = document.getElementById('reqid').value;
+        // text["vendorID"] = document.getElementById('venid').value;
+        // text["justification"] = document.getElementById('justi').value;
+        // text["moeApprovedDate"] = document.getElementById('appdate').value;
 
-        pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        var items_list = [];
+        var rows = document.getElementById("tbl").getElementsByTagName("tr").length;
+        for (i = 1; i < rows; i++) {
+          var item_details = {};
+          item_details["requistionItemId"] = document.getElementById("tbl").rows[i].cells[0].children[0].value;
+          item_details["itemDescription"] = document.getElementById("tbl").rows[i].cells[1].children[0].value;
+          item_details["quantity"] = document.getElementById("tbl").rows[i].cells[2].children[0].value;
+          item_details["unit"] = document.getElementById("tbl").rows[i].cells[3].children[0].value;
+          item_details["price"] = document.getElementById("tbl").rows[i].cells[4].children[0].value;
+          var single_item = JSON.stringify(item_details);
+          items_list[i-1] = single_item;
+        }
 
-        pom.setAttribute('download', filename);
+        // console.log(items_list);
+        text["items"] = items_list;
 
-        pom.style.display = 'none';
-        document.body.appendChild(pom);
-
-        pom.click();
-
-        document.body.removeChild(pom);
+        var display_JSON = JSON.stringify(text);
+        alert(display_JSON);
       }
 
     </script>
@@ -56,21 +61,21 @@
       </div>
     </div>
 
-    <form class="form-style-9" id = "MyForm" onsubmit="download(this['field1'].value)">
+    <form class="form-style-9" id = "MyForm" onsubmit="save()">
     
       <ul>
         <li> 
           <label for="reqid" class = "field-style field-split align-left">Requisition ID</label>
           <label for="venid" class="field-style field-split align-right">Vendor ID</label>
-          <input type="text" name="field1" class = "field-style field-split align-left" id = "reqid"/>
-          <input type="text" name="field2" class="field-style field-split align-right" id ="venid"/>
+          <input type="text" name="requisitionID" class = "field-style field-split align-left" id = "reqid"/>
+          <input type="text" name="vendorID" class="field-style field-split align-right" id ="venid"/>
         </li>
 
         <li>
           <label for="justi" class = "field-style field-split align-left">Justification</label>
           <label for="appdate" class="field-style field-split align-right">Approval Date</label>
-          <textarea name="field3" class="field-style field-split align-left" id = "justi" rows = "2"/></textarea>
-          <input type="date" name="field4" class="field-style field-split align-right" id = "appdate" />
+          <input type="text" name="justification" class="field-style field-split align-left" id = "justi"/>
+          <input type="text" name="moeApprovedDate" class="field-style field-split align-right" id = "appdate" />
         </li>
       </ul>
 
@@ -104,9 +109,11 @@
 
       <input id = "add" type ="button" onclick="copyRow();" value = "+" /> 
 
+<!--       <p onmouseover="save()"> TRIAL </p>
+ -->
       </div> <br> 
 
-      <input type="submit" value="Save to File" />
+      <input type="submit" value="Save to File"/>
 
     </form>
 

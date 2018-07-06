@@ -140,7 +140,7 @@ input[type="submit"]:hover {
     margin: 0px;
 }
 
-td input {
+.table2 td input {
     width: 100px;
     box-sizing: border-box; 
     -webkit-box-sizing: border-box;
@@ -165,9 +165,9 @@ td input {
     padding: none !important;
  }
 
-#items {
+/*#items {
   margin-top: 120px;
-}
+}*/
 
 input #justi{
     overflow: scroll;
