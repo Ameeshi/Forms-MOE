@@ -140,7 +140,11 @@ input[type="submit"]:hover {
     margin: 0px;
 }
 
-.table2 td input {
+#tbl {
+    margin-top: 100px;
+}
+
+#tbl td input {
     width: 100px;
     box-sizing: border-box; 
     -webkit-box-sizing: border-box;
@@ -169,6 +173,32 @@ input[type="submit"]:hover {
   margin-top: 120px;
 }*/
 
-input #justi{
+#justi{
     overflow: scroll;
+    line-height: 4em;
  }
+
+#big-table {
+    margin: 20px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 100%;
+    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+    border: 6px solid #305A72;
+}
+
+#big-table td, #big-table th {
+    border: 1px solid #B0CFE0;
+    padding: 8px;
+}
+
+#big-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#big-table tr:hover {background-color: #ddd;}
+
+#big-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #305A72;
+    color: white;
+}
