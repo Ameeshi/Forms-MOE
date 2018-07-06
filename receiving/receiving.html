@@ -1,0 +1,157 @@
+<html>
+<head>
+	<title> Requisitions </title>
+
+    <style>
+
+        table, th, td
+        {
+            margin:10px 0;
+            border:solid 1px #333;
+            padding:2px 4px;
+            font:15px Verdana;
+        }
+        th {
+            font-weight:bold;
+        }
+        body {
+          margin: 10px;
+        }
+        table {
+          margin: 20px;
+        }
+        tr {
+          margin: 10px;
+        }
+
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="css/req-form.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/backend_simulator.js"></script>
+    <script src="js/frontend_functions.js"></script>
+	<script type="text/javascript">
+		function ameeshi() {
+			json = backend_simulator(); //in production, this will be replaced by an AJAX call
+
+			obj = JSON.parse(json);
+			type = Object.keys(obj)[0]; //either 'rq' or 'rqlist'
+
+			if(type == "rqlist") {
+				rq_list(obj[type]); //does the rq list
+			} else {
+				rq_form(obj[type]); //does the rq form
+			}
+		}
+		//wait for page to fully load, then run the javascripts
+		window.onload = function() { ameeshi(); }
+	</script>
+</head>
+<body>
+
+	<div class="header">
+      <div class="header-left"><a href="#"> Receiving And Distribution </a></div>
+      <div class="header-right">
+        <a href="?">Receiving </a>
+        <a href="distribution.html">Distribution </a>
+      </div>
+    </div>
+
+	<!-- requisition list section -->
+	<div id="rqList">
+		List of Purchase Orders. <span style="color: grey; font-size: small;">Click on a row to edit.</span>
+		<table id="rqListTable">
+			<!-- Field names in the caption element. These match  data source field names.
+				Must be one contiguous line, no spaces after or before commas.
+				Must have 1 to 1 correspondence with the th's below. To change the
+				items in the rq list, change the field names and the corresponding th's. -->
+			<caption style="display: none;">
+				requisitionId,poNo,poDate,vendorName,rqAmount,justification,rcvDate,rcvBy,invoiceAmount,invoiceDate
+			</caption>
+			<tr>
+				<th>Id</th>
+				<th>PO</th>
+				<th>PO Date</th>
+				<th>Vendor</th>
+				<th style="text-align: right;">Amount</th>
+				<th>Justification</th>
+				<th>rcvDate</th>
+				<th>rcvBy</th>
+				<th style="text-align: right;">invAmount</th>
+				<th>invDate</th>
+			</tr>
+			<tr style="vertical-align: top; cursor: pointer;">
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td style="text-align: right;"></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td style="text-align: right;"></td>
+				<td></td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- requisition form section -->
+	<div id="rq">
+
+		<form class="form-style-9" id = "MyForm">
+
+			<div style="float: right;"><input type="submit" value="Save to File" /></div>
+			<div style="float: left;"><input type="submit" value="Back to List" onclick="location.href='?'" /></div>
+			<center>Requisition Id <span id="rqId" style="font-size: x-large; font-weight: bold;"></span></center>
+			<div style="clear: both;"></div>
+
+			<br />
+
+			<div id="rqData">
+				office: <input disabled name="initiatingOffice" value="" size=10 />
+				rqBy: <input disabled name="requestedBy" value="" size=10 />
+				vendor: <input disabled name="vendorId" value="" size=5 /><br />
+				justification:<input disabled name="justification" value="" size=60 /><br />
+				rcvDate: <input type=text name="rcvDate" value="" size=12 />
+				rcvBy: <input type=text name="rcvBy" value="" size=12 /><br />
+				invNo:<input name="invoiceNo" value="" size=10 />
+				invAmount: <input type=text name="invoiceAmount" value="" size=5 />
+				invDate: <input type=text name="invoiceDate" value="" size=12 />
+			</div>
+
+			<div id = "items">
+
+				<div id = "table2">
+					<table id = "tbl">
+						<tr>
+							<th style="color: grey;"> Id </th>
+							<th style="color: grey;"> Acc </th>
+							<th style="color: grey;"> Description </th>
+							<th style="text-align: right; color: grey;"> Qty </th>
+							<th style="color: grey;"> Unit </th>
+							<th style="text-align: right; color: grey;"> Price </th>
+							<th style="text-align: right;"> rcvQty </th>
+							<th style="text-align: right;"> rcvPrice </th>
+						</tr>
+						<tr>
+							<td> <input disabled type="text" name="requisitionItemId" value="" size=3 /> </td>
+							<td> <input disabled type="text" name="acc" value="" size=4 /> </td>
+							<td> <input disabled type="text" name="description" value="" size=25 /> </td>
+							<td> <input disabled type="text" name="quantity" value="" size=4 style="text-align: right;" /> </td>
+							<td> <input disabled type="text" name="unit" value="" size=5 /> </td>
+							<td> <input disabled type="text" name="price" value="" size=6 style="text-align: right;" /> </td>
+							<td> <input type="text" name="rcvQuantity" value="" size=4 style="text-align: right;" /> </td>
+							<td> <input type="text" name="rcvPrice" value="" size=6 style="text-align: right;" /> </td>
+						</tr>
+					</table>
+
+				</div><br>
+
+			</div>
+
+	    </form>
+	</div>
+
+</body>
+</html>
