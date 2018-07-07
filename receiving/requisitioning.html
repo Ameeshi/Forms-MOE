@@ -1,0 +1,144 @@
+<html>
+<head>
+	<title> Requisitioning </title>
+
+    <link rel="stylesheet" type="text/css" href="css/req-form.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/backend_simulator.js"></script>
+    <script src="js/frontend_functions_rq.js"></script>
+    <script src="js/frontend_main.js"></script>
+
+	<script type="text/javascript">
+		//wait for page to fully load, then run the javascripts
+		window.onload = function() { main(); }
+	</script>
+</head>
+<body>
+<div id="site_wrap">
+
+	<div class="header">
+      <div class="header-left"><a href="#"> REQUISITIONING </a></div>
+      <div class="header-right">
+        <a style="background-color:white; color: #305A72;" href="?">Requisitioning </a>
+        <a href="receiving.html">Receiving </a>
+        <a href="distribution.html">Distribution </a>
+        <a href="inventory.html">Inventory </a>
+      </div>
+    </div>
+
+	<!-- requisition list section -->
+	<div id="rqList" class="div_wrap">
+
+		<div class="align-right">
+			<button onclick="location.href='?requisitionId=new'">New RQ</button>
+		</div>
+		List of Purchase Orders. <span style="color: grey; font-size: small;">Click on a row to edit.</span>
+		<div style="clear: both;"></div>
+
+		<table id="rqListTable" class="tbl">
+			<!-- Field names in the caption element. These match  data source field names.
+				Must be one contiguous line, no spaces after or before commas.
+				Must have 1 to 1 correspondence with the th's below. To change the
+				items in the rq list, change the field names and the corresponding th's. -->
+			<caption style="display: none;">
+				requisitionId,initiatingOffice,preparedBy,preparedDate,vendorName,rqAmount,justification,poNo,poDate
+			</caption>
+			<tr>
+				<th>Id</th>
+				<th>Office</th>
+				<th>PrepBy</th>
+				<th>PrepDate</th>
+				<th>Vendor</th>
+				<th style="text-align: right;">Amount</th>
+				<th>Justification</th>
+				<th>PO</th>
+				<th>PO Date</th>
+			</tr>
+			<tr style="vertical-align: top; cursor: pointer;">
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td style="text-align: right;"></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- requisition form section -->
+	<div id="rq" class="div_wrap">
+
+		<div class="align-right">
+			<button onclick="print_rq();">Print</button>
+			<button onclick="backend_simulator('rq_form_save');">Save</button>
+		</div>
+		<div class="align-left"><button onclick="location.href='?'">Back to List</button></div>
+		<center>Requisition Id <span id="rqId" style="font-size: x-large; font-weight: bold;"></span></center>
+		<div style="clear: both;"></div>
+		
+		<br />
+
+		<form id = "MyForm">
+
+			<div id="rqData">
+				<p style="margin-bottom: 6px;">
+				office: <input name="initiatingOffice" value="" size=10 />
+				rqBy: <input name="requestedBy" value="" size=10 />
+				prepBy: <input name="preparedBy" value="" size=15 />
+				prepDate: <input name="preparedDate" value="" size=10 />
+				vendor: <input name="vendorId" value="" style="width: 2em;" /><input disabled name="vendorName" value="" size=30 />
+				</p>
+				<p style="margin-bottom: 6px;">
+				justification:<input name="justification" value="" size=140 /><br style="margin-bottom: 4px;" />
+				</p>
+				<div class="align-right">rqAmount: $<input type=text name="rqAmount" value="" style="width: 70px; text-align: right;" /></div>
+				rqApprvDate: <input type=text name="moeApprovedDate" value="" size=12 />
+				PO: <input type=text name="poNo" value="" size=6 />
+				PO Date:<input name="poDate" value="" size=12 />
+				PO Amount: $<input type=text name="poAmount" value="" style="width: 70px; text-align: right;" />
+				<div style="clear: both;"></div>
+			</div>
+
+			<table id = "items_table" class="tbl">
+				<tr>
+					<th style="text-align: right; color: grey;"> Id </th>
+					<th> Org </th>
+					<th> CCtr </th>
+					<th> Task </th>
+					<th> Opt </th>
+					<th> SAcc </th>
+					<th style="text-align: right;"> Qty </th>
+					<th> Unit </th>
+					<th style="text-align: right;"> Price </th>
+					<th style="text-align: right; color: grey;">Extended</th>
+					<th> Description </th>
+					<th style="width: 20px;"> del </th>
+				</tr>
+				<tr>
+					<td style="width: 50px;"> <input disabled type="text" name="requisitionItemId" value="" style="text-align: right;" /> </td>
+					<td style="width: 60px;"> <input type="text" name="org" value="" /> </td>
+					<td style="width: 80px;"> <input type="text" name="costCenter" value="" /> </td>
+					<td style="width: 60px;"> <input type="text" name="task" value="" /> </td>
+					<td style="width: 60px;"> <input type="text" name="opt" value="" /> </td>
+					<td style="width: 60px;"> <input type="text" name="acc" value="" /> </td>
+					<td style="width: 60px;"> <input type="text" name="quantity" value="" style="text-align: right;" /> </td>
+					<td style="width: 40px;"> <input type="text" name="unit" value="" /> </td>
+					<td style="width: 80px;"> <input type="text" name="price" value="" style="text-align: right;" /> </td>
+					<td style="width: 80px;"> <input disabled type="text" name="extended" value="" style="text-align: right;" /> </td>
+					<td> <input type="text" name="description" value="" /> </td>
+					<td> <input type="checkbox" name="del" value=0 /> </td>
+				</tr>
+			</table>
+			<input id = "add" type ="button" onclick="copyRow('items_table');" value = "+" /> 
+			<input id = "add" type ="button" onclick="deleteRow('items_table');" value = "-" /> 
+	    </form>
+	</div>
+</div>
+
+</body>
+</html>
