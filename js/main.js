@@ -169,3 +169,5 @@ function copyRow() {
   var html = $('#tbl tr:last').html();
   $('#tbl tr:last').after("<tr>" + html + "</tr>");
 }
+
+
