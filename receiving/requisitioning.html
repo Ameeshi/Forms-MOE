@@ -18,9 +18,9 @@
 <div id="site_wrap">
 
 	<div class="header">
-      <div class="header-left"><a href="#"> REQUISITIONING </a></div>
+      <div class="header-left"><a href="#"> MOE Forms </a></div>
       <div class="header-right">
-        <a style="background-color:white; color: #305A72;" href="?">Requisitioning </a>
+        <a id = "selected" href="requisitioning.html">Requisitioning </a>
         <a href="receiving.html">Receiving </a>
         <a href="distribution.html">Distribution </a>
         <a href="inventory.html">Inventory </a>
@@ -33,15 +33,15 @@
 		<div class="align-right">
 			<button onclick="location.href='?requisitionId=new'">New RQ</button>
 		</div>
-		List of Purchase Orders. <span style="color: grey; font-size: small;">Click on a row to edit.</span>
-		<div style="clear: both;"></div>
+		List of Purchase Orders. 
+		<span style="color: grey;">Click on a row to edit.</span> <br><br>
 
 		<table id="rqListTable" class="tbl">
 			<!-- Field names in the caption element. These match  data source field names.
 				Must be one contiguous line, no spaces after or before commas.
 				Must have 1 to 1 correspondence with the th's below. To change the
 				items in the rq list, change the field names and the corresponding th's. -->
-			<caption style="display: none;">
+			<caption>
 				requisitionId,initiatingOffice,preparedBy,preparedDate,vendorName,rqAmount,justification,poNo,poDate
 			</caption>
 			<tr>
@@ -65,7 +65,6 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
 			</tr>
 		</table>
 	</div>
@@ -85,37 +84,35 @@
 
 		<form id = "MyForm">
 
+			<div id="Printable Area">
+
 			<div id="rqData">
-				<p style="margin-bottom: 6px;">
-				office: <input name="initiatingOffice" value="" size=10 />
-				rqBy: <input name="requestedBy" value="" size=10 />
-				prepBy: <input name="preparedBy" value="" size=15 />
-				prepDate: <input name="preparedDate" value="" size=10 />
-				vendor: <input name="vendorId" value="" style="width: 2em;" /><input disabled name="vendorName" value="" size=30 />
-				</p>
-				<p style="margin-bottom: 6px;">
-				justification:<input name="justification" value="" size=140 /><br style="margin-bottom: 4px;" />
-				</p>
-				<div class="align-right">rqAmount: $<input type=text name="rqAmount" value="" style="width: 70px; text-align: right;" /></div>
-				rqApprvDate: <input type=text name="moeApprovedDate" value="" size=12 />
-				PO: <input type=text name="poNo" value="" size=6 />
-				PO Date:<input name="poDate" value="" size=12 />
-				PO Amount: $<input type=text name="poAmount" value="" style="width: 70px; text-align: right;" />
-				<div style="clear: both;"></div>
+				Office: 		<input type="text" name="initiatingOffice" value="" />
+				RqBy: 			<input type="text" name="requestedBy" value="" />
+				PrepBy: 		<input type="text" name="preparedBy" value="" /><br>
+				PrepDate: 		<input size = "10%" type="text" name="preparedDate" value=""/>
+				Vendor: 		<input size = "10%" type="text" name="vendorId" value=""/>
+								<input disabled name="vendorName" value="" /> <br>
+				Justification:	<input type="text" name="justification" value="" size = 100%/>
+				RqAmount: 	   $<input size = "10%" type=text name="rqAmount" value=""/>
+				RqApprvDate: 	<input size = "10%" type="text" name="moeApprovedDate" value=""/>
+				PO: 			<input size = "10%" type="text" name="poNo" value=""/><br>
+				PO Date:		<input size = "10%" type="text" name="poDate" value="" />
+				PO Amount: 	   $<input size = "10%" type="text" name="poAmount" value=""  />
 			</div>
 
 			<table id = "items_table" class="tbl">
 				<tr>
-					<th style="text-align: right; color: grey;"> Id </th>
+					<th> Id </th>
 					<th> Org </th>
 					<th> CCtr </th>
 					<th> Task </th>
 					<th> Opt </th>
 					<th> SAcc </th>
-					<th style="text-align: right;"> Qty </th>
+					<th> Qty </th>
 					<th> Unit </th>
-					<th style="text-align: right;"> Price </th>
-					<th style="text-align: right; color: grey;">Extended</th>
+					<th> Price </th>
+					<th> Extended</th>
 					<th> Description </th>
 					<th style="width: 20px;"> del </th>
 				</tr>
@@ -134,6 +131,8 @@
 					<td> <input type="checkbox" name="del" value=0 /> </td>
 				</tr>
 			</table>
+
+		</div>
 			<input id = "add" type ="button" onclick="copyRow('items_table');" value = "+" /> 
 			<input id = "add" type ="button" onclick="deleteRow('items_table');" value = "-" /> 
 	    </form>

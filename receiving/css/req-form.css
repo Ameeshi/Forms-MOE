@@ -1,5 +1,5 @@
 body {
-    font-family: Helvetica;
+    font-family: Tahoma, Geneva, sans-serif;
     color: grey;
 }
 
@@ -16,30 +16,34 @@ label {
     color: black;
 }
 
-.form-style-9 {
-    max-width: 70%;
-    background: #FAFAFA;
-    padding: 30px;
-    margin: 50px auto;
-    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
-    border-radius: 10px;
-    border: 6px solid #305A72;
+caption {
+    display: none;
 }
 
-.form-style-9 ul{
+#MyForm {
+    max-width: 100%;
+    background: #FAFAFA;
+    padding: 30px;
+    margin: 10px;
+    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+    border-radius: 10px;
+    border: 2px solid #305A72;
+}
+
+#MyForm ul{
     padding:0;
     margin:0;
     list-style:none;
 }
 
-.form-style-9 ul li{
+#MyForm ul li{
     font-size: 1em;
     display: block;
     margin-bottom: 10px;
     min-height: 35px;
 }
 
-.form-style-9 ul li  .field-style{
+#MyForm ul li  .field-style{
     box-sizing: border-box; 
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; 
@@ -52,53 +56,47 @@ label {
     -o-transition: all 0.30s ease-in-out;
 }
 
-.form-style-9 ul li  .field-style:focus{
+#MyForm ul li  .field-style:focus{
     box-shadow: 0 0 5px #B0CFE0;
     border:1px solid #B0CFE0;
-}
-
-.form-style-9 ul li .field-split{
-    width: 49%;
-}
-
-.form-style-9 ul li .field-full{
-    width: 100%;
-}
-
-.form-style-9 ul li input.align-left{
-    float:left;
 }
 
 .align-left{
     float:left;
 }
 
-.form-style-9 ul li input.align-right{
-    float:right;
-}
-
 .align-right{
     float:right;
 }
 
-.form-style-9 ul li textarea{
-    width: 100%;
-    height: 100px;
+#MyForm {
+    font-weight: bold;
+}
+
+#rqData input {
+    margin-bottom: 1%;
+    margin-left: 0.2%;
+    margin-right: 1%;
+}
+
+input {
+    font-weight: normal !important;
 }
 
 input[type="button"], 
-input[type="submit"] {
+input[type="submit"], button {
     -moz-box-shadow: inset 0px 1px 0px 0px #3985B1;
     -webkit-box-shadow: inset 0px 1px 0px 0px #3985B1;
     box-shadow: inset 0px 1px 0px 0px #3985B1;
     background-color: #216288;
     border: 1px solid #17445E;
+    border-radius: 5px;
     display: inline-block;
     cursor: pointer;
     color: #FFFFFF;
     padding: 8px 18px;
     text-decoration: none;
-    font: 12px Arial, Helvetica, sans-serif;
+    font: 12px;
 }
 
 input[type="button"]:hover, 
@@ -132,6 +130,11 @@ input[type="submit"]:hover {
 
 }
 
+#selected {
+    background-color:white; 
+    color: #305A72;
+}
+
 .header-right {
     float: right;
 }
@@ -140,22 +143,13 @@ input[type="submit"]:hover {
     margin: 0px;
 }
 
-#tbl {
-    margin-top: 100px;
-}
-
 #tbl td input {
-    width: 100px;
     box-sizing: border-box; 
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; 
     outline: none;
     padding: 2px;
     border: 1px solid #B0CFE0;
-    -webkit-transition: all 0.30s ease-in-out;
-    -moz-transition: all 0.30s ease-in-out;
-    -ms-transition: all 0.30s ease-in-out;
-    -o-transition: all 0.30s ease-in-out;
 }
 
 .btn-info { 
@@ -163,44 +157,40 @@ input[type="submit"]:hover {
     border-color: #305A72 !important;
  }
 
- .form-style-9 ul li label {
-    box-sizing: none !important; 
-    border: none !important;
-    padding: none !important;
- }
-
-/*#items {
-  margin-top: 120px;
-}*/
-
 #justi{
     overflow: scroll;
     line-height: 4em;
  }
 
-#big-table {
+#rqListTable {
     margin: 20px;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    width: 100%;
+    width: 95%;
     box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
-    border: 6px solid #305A72;
+    border: 2px solid #305A72;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
 }
 
-#big-table td, #big-table th {
+#rqListTable td, #rqListTable th {
     border: 1px solid #B0CFE0;
     padding: 8px;
 }
 
-#big-table tr:nth-child(even){background-color: #f2f2f2;}
+#rqListTable tr:nth-child(even){background-color: #f2f2f2;}
 
-#big-table tr:hover {background-color: #ddd;}
+#rqListTable tr:hover {background-color: #ddd;}
 
-#big-table th {
+#rqListTable th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
     background-color: #305A72;
     color: white;
+}
+
+.small-box {
+    size: 10px;
 }
 
 #site_wrap {
@@ -229,7 +219,7 @@ input[type="submit"]:hover {
     color: #FFFFFF;
     padding: 8px 18px;
     text-decoration: none;
-    font: 12px Arial, Helvetica, sans-serif;
+    font: 12px;
 }
 
 .tbl {
@@ -238,10 +228,9 @@ input[type="submit"]:hover {
     background: #FAFAFA;
     padding: 1em;
     margin: 1em auto;
-    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
-    border-radius: 10px;
-    border: 2px solid #305A72;
+    border: 1px solid #305A72;
 }
+
 .tbl input { width: 100%; padding: 0 3px 0 3px; }
 .tbl th { border: none; padding: 0 4px 0 4px; }
 .tbl td { border: 1px solid grey; padding: 0 4px 0 4px; }
