@@ -15,17 +15,18 @@
 	</script>
 </head>
 <body>
-<div id="site_wrap">
 
-	<div class="header">
-      <div class="header-left"><a href="#"> MOE Forms </a></div>
-      <div class="header-right">
-        <a id = "selected" href="requisitioning.html">Requisitioning </a>
-        <a href="receiving.html">Receiving </a>
-        <a href="distribution.html">Distribution </a>
-        <a href="inventory.html">Inventory </a>
-      </div>
-    </div>
+<div class="header">
+  <div class="header-left"><a href="#"> MOE Forms </a></div>
+  <div class="header-right">
+    <a id = "selected" href="requisitioning.html">Requisitioning </a>
+    <a href="receiving.html">Receiving </a>
+    <a href="distribution.html">Distribution </a>
+    <a href="inventory.html">Inventory </a>
+  </div>
+</div> <br>
+
+<div id="site_wrap">
 
 	<!-- requisition list section -->
 	<div id="rqList" class="div_wrap">
@@ -77,14 +78,14 @@
 			<button onclick="backend_simulator('rq_form_save');">Save</button>
 		</div>
 		<div class="align-left"><button onclick="location.href='?'">Back to List</button></div>
-		<center>Requisition Id <span id="rqId" style="font-size: x-large; font-weight: bold;"></span></center>
+		<center>Requisition ID <span id="rqId" style="font-weight: bold;"></span></center>
 		<div style="clear: both;"></div>
 		
 		<br />
 
 		<form id = "MyForm">
 
-			<div id="Printable Area">
+			<div id="section-to-print">
 
 			<div id="rqData">
 				Office: 		<input type="text" name="initiatingOffice" value="" />
@@ -96,7 +97,7 @@
 				Justification:	<input type="text" name="justification" value="" size = 100%/>
 				RqAmount: 	   $<input size = "10%" type=text name="rqAmount" value=""/>
 				RqApprvDate: 	<input size = "10%" type="text" name="moeApprovedDate" value=""/>
-				PO: 			<input size = "10%" type="text" name="poNo" value=""/><br>
+				PO: 			<input size = "10%" type="text" name="poNo" value=""/>
 				PO Date:		<input size = "10%" type="text" name="poDate" value="" />
 				PO Amount: 	   $<input size = "10%" type="text" name="poAmount" value=""  />
 			</div>

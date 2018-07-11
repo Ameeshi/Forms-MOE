@@ -20,6 +20,13 @@ caption {
     display: none;
 }
 
+input:disabled {
+    outline: none;
+    background-color: transparent;
+    border: 0px solid;
+    color: grey;
+}
+
 #MyForm {
     max-width: 100%;
     background: #FAFAFA;
@@ -229,9 +236,23 @@ input[type="submit"]:hover {
     padding: 1em;
     margin: 1em auto;
     border: 1px solid #305A72;
+    font-size: 1em;
 }
 
-.tbl input { width: 100%; padding: 0 3px 0 3px; }
-.tbl th { border: none; padding: 0 4px 0 4px; }
+.tbl input { width: 100%; }
+.tbl th { padding: 0 4px 0 4px; }
 .tbl td { border: 1px solid grey; padding: 0 4px 0 4px; }
 
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #section-to-print, #section-to-print * {
+        visibility: visible;
+    }
+    #section-to-print {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
