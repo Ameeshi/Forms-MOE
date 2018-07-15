@@ -1,0 +1,444 @@
+<html>
+<head>
+	<title> Requisition Form </title>
+
+    <link rel="stylesheet" type="text/css" href="css/req-print.css">
+    <!-- <script src="js/frontend_functions_rq.js"></script> -->
+    <script src="js/backend_simulator.js"></script>
+    <script src="js/frontend_main.js"></script>
+
+    <script type="text/javascript">
+		//wait for page to fully load, then run the javascripts
+		function rq_sth(myRequisition) {
+
+			document.getElementById("rqId").innerHTML += myRequisition["requisitionId"];
+
+			var section1 = document.getElementById("first").rows[0];
+
+			section1.cells[0].innerHTML += "<br/>" + myRequisition["initiatingOffice"];
+			section1.cells[1].innerHTML += "<br/>" + myRequisition["preparedBy"];
+			section1.cells[2].innerHTML += "<br/>" + myRequisition["requestedDate"];
+			section1.cells[3].innerHTML += "<br/>" + myRequisition["poNo"];
+
+			var section2 = document.getElementById("second").rows[0];
+
+			section2.cells[0].innerHTML += "<br/>" + myRequisition["vendorId"] + "<br/>" + myRequisition["vendorName"]
+
+			//populate the rq items data elements
+
+			var tbl = document.getElementById("items");
+
+			var itemlen = myRequisition.items.length;
+
+			for (i = 0; i < itemlen; i++) {
+
+				var inputs = tbl.rows[i + 1].cells
+				for(j=0; j<inputs.length; j++) {
+					if (myRequisition["items"][i][tbl.rows[0].cells[j].id] === undefined) {
+						inputs[j].innerHTML = ""
+					}
+					else {
+						inputs[j].innerHTML = myRequisition["items"][i][tbl.rows[0].cells[j].id];			
+					}
+				}
+			}  
+		}	
+
+		function main(prm) {
+
+			var qGET = new URLSearchParams(location.search);
+			if(qGET.get("requisitionId") == "new") {
+				// document.getElementById("rqList").style.display = "none";
+				// document.getElementById("rq").style.display = "block";
+				// document.getElementById("rqId").innerText = "new";
+			} else {
+				json = backend_simulator(); //in production, this will be replaced by an AJAX call
+
+				obj = JSON.parse(json);
+				type = Object.keys(obj)[0]; //either 'rq' or 'rqlist'
+
+
+				rq_sth(obj[type]); //does the rq form
+				
+			}
+		}
+
+		window.onload = function() { main(); }
+	</script>
+
+</head>
+<body>
+
+	<div id = "container"> <div id = "page">
+
+<p style = "text-align: left">REPUBLIC OF PALAU</p>
+<p><strong>REQUISITION</strong></p> 
+
+<p style = "text-align: left" id = "rqId"> Requisition Id: </p>
+
+<table id = "first">
+	<tbody>
+		<tr>
+			<td>
+				Requesting Office:
+			</td>
+			<td>
+				Prepared By:
+			</td>
+			<td>
+				Date Entered:
+			</td>
+			<td>
+				Purchase Order No:
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table id = "second">
+	<tbody>
+		<tr>
+			<td>
+			Vendor Name, Number and Address:
+			</td>
+			<td>
+			Delivery Name and Address:
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table id = "items">
+<tbody>
+<tr>
+	<th id = "requisitionItemId">No</th>
+	<th>Fund</th>
+	<th>Sub</th>
+	<th id = "task">Task</th>
+	<th id = "opt">Opt</th>
+	<th id = "cost">Cost</th>
+	<th id = "quantity">Qty</th>
+	<th id = "unit">Unit</th>
+	<th id = "price">Unit Price</th>
+	<th id = "extended">Total</th>
+	<th id = "description">Description</th>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+
+</tbody>
+</table>
+<br/><br/> 
+
+<center> See attached for justification, basis of selection and budget reference. <br/>
+Quotations are attached for further details. </center><br/> 
+
+<table id = "last">
+	<tbody>
+		<tr>
+			<td>
+				Approved by Director:
+			</td>			
+			<td>
+				Date:	
+			</td>			
+			<td>
+				Approved by Procurement Officer:	
+			</td>			
+			<td>
+				Date:
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				Approved by Minister:
+			</td>
+			<td>
+				Date:
+			</td>
+			<td>
+				Funds Availability:
+			</td>
+			<td>
+				Date:
+			</td>
+		</tr>
+
+	</tbody>
+</table>
+
+</div></div>
+</body>
+</html>
