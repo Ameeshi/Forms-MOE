@@ -5,29 +5,54 @@
     <link rel="stylesheet" type="text/css" href="css/req-form.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery.min.js"></script>
-    <script src="js/backend_simulator.js"></script>
+    <script src="js/backend_simulator_2.js"></script>
     <script src="js/frontend_functions_dist.js"></script>
-    <script src="js/frontend_main.js"></script>
 
 </head>
 <body>
+
+<div class="header">
+  <div class="header-left"><a href="#"> MOE Forms </a></div>
+  <div class="header-right">
+    <a href="requisitioning.html">Requisitioning </a>
+    <a href="receiving.html">Receiving </a>
+    <a id = "selected" href="distribution.html">Distribution </a>
+    <a href="inventory.html">Inventory </a>
+  </div>
+</div> <br>
+
 <div id="site_wrap">
 
-	<div class="header">
-      <div class="header-left"><a href="distribution.html"> RECEIVING AND DISTRIBUTION </a></div>
-      <div class="header-right">
-        <a href="requisitioning.html"> Requisitioning </a>
-        <a href="receiving.html"> Receiving </a>
-        <a style="background-color:white; color: #305A72;" href="?">Distribution </a>
-        <a href="inventory.html"> Inventory </a>
-      </div>
+    <div class = "align-left" style="width: 30%;"">
+      <table id = "distTable">
+        <caption> poNo, requisitionItemId, description, quantity </caption>
+        <tr> 
+          <th> PO# </th>
+          <th> Req Item Id </th>
+          <th> Description </th>
+          <th> Quantity </th>
+          <th> </th>
+        </tr>
+
+        <tr> 
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="btn btn-info btn-lg" id = "plus"> + </td>
+        </tr>
+      </table>
     </div>
 
-	    <form class="form-style-9" id = "MyForm" onsubmit="save()">
-	     
-	     	<h1>Distribution - Under Construction</h1>
-
-	    </form>	</div>
+    <div class = "align-right" style="width: 60%;">
+      <table id = "distTable2">
+        <tr> 
+          <th> Req Item Id </th>
+          <th> Req Id </th>
+          <th> Asset No </th>
+        </tr>
+      </table>
+    </div>
 
 </div>
 </body>
