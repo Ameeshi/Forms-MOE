@@ -1,5 +1,7 @@
 function dist_list(myRequisitions) {
 
+	console.log(myRequisitions);
+
 	//get the rqListTable
 	var tbl = document.getElementById("distTable");
 
@@ -10,31 +12,26 @@ function dist_list(myRequisitions) {
 	// ADD JSON DATA TO THE TABLE AS ROWS.
 	for (var i = 0; i < myRequisitions.length; i++) {
 
-		id = myRequisitions[i]["requisitionId"];
+		id = myRequisitions[i]["requisitionId"]; 
 
-		console.log(id);
-		json = backend_simulator_2(id);
-		obj = JSON.parse(json);
-		type = Object.keys(obj)[0]; 
-
-		myRequisition = obj[type];
-
-		items_length = myRequisition["items"].length;
+		items_length = (myRequisitions[i]["items"]).length;
 
 		for (var j = 0; j < items_length; j++) {
 
 			//check if there is a row. if not, add it.
-			if(tbl.rows[i + j + 1] === undefined) {
-				var cln = tbl.rows[i].cloneNode(true);
-				tbl.appendChild(cln);
-			}
 
-			var tr = tbl.rows[i + j + 1];
+			if ( i > 0) {
+			var cln = tbl.rows[1].cloneNode(true);
+			tbl.appendChild(cln); };
+		
+			var tr = tbl.rows[tbl.rows.length-1];
 
 			tr.cells[0].innerHTML = myRequisitions[i][col[0]];
-			tr.cells[1].innerHTML = myRequisition["items"][j]["requisitionItemId"]
-			tr.cells[2].innerHTML = myRequisition["items"][j]["description"]
-			tr.cells[3].innerHTML = myRequisition["items"][j]["quantity"]
+			tr.cells[1].innerHTML = j+1;
+			tr.cells[2].innerHTML = myRequisitions[i]["items"][j]["requisitionItemId"];
+			tr.cells[3].innerHTML = myRequisitions[i]["items"][j]["description"];
+			tr.cells[4].innerHTML = myRequisitions[i]["items"][j]["quantity"];
+			tr.cells[5].value = myRequisitions[i]["requisitionId"];
 
 		}
 
@@ -43,18 +40,8 @@ function dist_list(myRequisitions) {
 }
 
 
-function main(prm) {
-
-  json = backend_simulator_2(); //in production, this will be replaced by an AJAX call
-
-  obj = JSON.parse(json);
-  type = Object.keys(obj)[0]; 
-
-  dist_list(obj[type]); 
-    
-}
-
 function addRowHandlers() {
+	var clicks = 0;
     var table = document.getElementById("distTable");
     var rows = table.getElementsByTagName("tr");
     for (i = 0; i < rows.length; i++) {
@@ -63,27 +50,82 @@ function addRowHandlers() {
             function(row) 
             {
                 return function() { 
-                    var cell = row.getElementsByTagName("td")[0];
-                    var poNo = cell.innerHTML;
-                    alert(poNo);
-                    // addRq(poNo);
-                                 };
+
+                	clicks +=1
+
+                    var rqItemId = row.getElementsByTagName("td")[2].innerHTML;
+     				var desc =     row.getElementsByTagName("td")[3].innerHTML;
+     				var quan =     row.getElementsByTagName("td")[4].innerHTML;
+                    var rqId =     row.getElementsByTagName("td")[5].value;                    
+
+					var tbl = document.getElementById("distTable2");
+
+					if (clicks > 1) {
+						var cln = tbl.rows[1].cloneNode(true);
+						tbl.appendChild(cln); 
+					};
+
+					tbl.rows[tbl.rows.length - 1].cells[1].innerHTML = rqItemId;
+					tbl.rows[tbl.rows.length - 1].cells[2].innerHTML = desc;
+					var quan_td = tbl.rows[tbl.rows.length - 1].cells[3];
+					quan_td.getElementsByTagName("input")[0].value = quan;
+
+                };
             };
 
         currentRow.onclick = createClickHandler(currentRow);
     }
 }
 
-function addRq(poNo) {
-	var tbl = document.getElementById("distTable2");
-	var cln = tbl.rows[i].cloneNode(true);
-	tbl.appendChild(cln);
+function deleteRow(tableId) {
+	var tbl = document.getElementById(tableId);
+	var lastRow = tbl.rows.length - 1;
+	// inputs = tbl.rows[lastRow].getElementsByTagName("input");
+	// var noContent = true;
+	// for(j=0, l=inputs.length; j<l; j++) {
+	// 	if(inputs[j].value.length > 0) { noContent = false; break; }
+	// }
+	// if(noContent) {
+	// 	tbl.deleteRow(lastRow);
+	// }
+	if (tbl.rows.length > 2) {
+		tbl.deleteRow(lastRow);
+	}
+}
+
+// function dist_form_validate() {
+
+// 	var valid = true;
+
+// 	//rq data
+// 	var inputs = document.getElementById("").getElementsByTagName("input");
+// 	for(i = 0, l=inputs.length; i<l; i++) {
+// 		var name = inputs[i].name; var value = inputs[i].value;
+// 		if(value == "") {
+// 			if(name == "initiatingOffice") { valid = false; break; }
+// 			if(name == "preparedDate") { valid = false; break; }
+// 			if(name == "vendorId") { valid = false; break; }
+// 			if(name == "justification") { valid = false; break; }
+// 		}
+// 	}
+	
+// 	return valid;
+// }
+
+function save() {
 
 }
 
-function start() {
-	main();
-	addRowHandlers();
+
+function main(prm) {
+
+  json = backend_simulator_dist(); //in production, this will be replaced by an AJAX call
+
+  obj = JSON.parse(json);
+  type = Object.keys(obj)[0]; 
+
+  dist_list(obj[type]); 
 }
 
-window.onload = function() { start(); }
+
+window.onload = function() { main(); addRowHandlers(); }

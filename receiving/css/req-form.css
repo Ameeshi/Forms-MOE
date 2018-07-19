@@ -103,8 +103,16 @@ th, td {
     margin-right: 1%;
 }
 
+#distform { 
+    margin-top: 10px;
+ }
+
 input {
     font-weight: normal !important;
+}
+
+#site_wrap #MyForm input {
+    margin: 5px;
 }
 
 input[type="button"], 
@@ -186,7 +194,7 @@ input[type="submit"]:hover {
     line-height: 4em;
  }
 
-#rqListTable, #distTable {
+table {
     margin: 20px;
     width: 95%;
     box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
@@ -197,13 +205,8 @@ input[type="submit"]:hover {
 }
 
 #distTable2 {
-    margin: 20px;
-    width: 95%;
-    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
-    border: 2px solid #305A72;
-    border-radius: 5px 5px 5px 5px;
-    -moz-border-radius: 5px 5px 5px 5px;
-    -webkit-border-radius: 5px 5px 5px 5px;
+    width: 100%;
+    margin: 10px auto;
 }
 
 #rqListTable td, #rqListTable th, #distTable td, #distTable th {
