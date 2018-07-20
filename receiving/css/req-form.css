@@ -111,9 +111,11 @@ input {
     font-weight: normal !important;
 }
 
-#site_wrap #MyForm input {
-    margin: 5px;
+#site_wrap #setheight #MyForm input {
+    margin: 4px;
 }
+
+
 
 input[type="button"], 
 input[type="submit"], button {

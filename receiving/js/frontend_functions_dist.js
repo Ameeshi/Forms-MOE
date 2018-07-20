@@ -1,7 +1,5 @@
 function dist_list(myRequisitions) {
 
-	console.log(myRequisitions);
-
 	//get the rqListTable
 	var tbl = document.getElementById("distTable");
 
@@ -80,39 +78,67 @@ function addRowHandlers() {
 function deleteRow(tableId) {
 	var tbl = document.getElementById(tableId);
 	var lastRow = tbl.rows.length - 1;
-	// inputs = tbl.rows[lastRow].getElementsByTagName("input");
-	// var noContent = true;
-	// for(j=0, l=inputs.length; j<l; j++) {
-	// 	if(inputs[j].value.length > 0) { noContent = false; break; }
-	// }
-	// if(noContent) {
-	// 	tbl.deleteRow(lastRow);
-	// }
 	if (tbl.rows.length > 2) {
 		tbl.deleteRow(lastRow);
 	}
 }
 
-// function dist_form_validate() {
+function dist_form_validate() {
 
-// 	var valid = true;
-
-// 	//rq data
-// 	var inputs = document.getElementById("").getElementsByTagName("input");
-// 	for(i = 0, l=inputs.length; i<l; i++) {
-// 		var name = inputs[i].name; var value = inputs[i].value;
-// 		if(value == "") {
-// 			if(name == "initiatingOffice") { valid = false; break; }
-// 			if(name == "preparedDate") { valid = false; break; }
-// 			if(name == "vendorId") { valid = false; break; }
-// 			if(name == "justification") { valid = false; break; }
-// 		}
-// 	}
+	var valid = true;
 	
-// 	return valid;
-// }
+	return valid;
+}
 
 function save() {
+
+	if(dist_form_validate() == true) {
+
+		var formId = document.getElementsByName("formid")[0].value;
+		var formDate = document.getElementsByName("formdate")[0].value;
+		var destination = document.getElementsByName("destination")[0].value;
+		var dateCompleted = document.getElementsByName("dt_compl")[0].value;
+
+		var text = {};
+
+		text["formId"] = formId;
+		text["formDate"] = formDate;
+		text["destination"] = destination;
+		text["dateCompleted"] = dateCompleted;
+
+
+		var rows = document.getElementById("distTable2").rows;
+
+		var items_list = [];
+
+		for (i = 1; i < rows.length; i++) {
+
+			items_list[i-1] = {}
+
+			for (j = 0; j < rows[i].cells.length; j++) {
+				items_list[i-1]["distribItemId"] =     rows[i].cells[0].innerHTML; 
+				items_list[i-1]["requisitionItemId"] = rows[i].cells[1].innerHTML;
+				items_list[i-1]["description"] =	   rows[i].cells[2].innerHTML;
+				items_list[i-1]["quantity"] =		   rows[i].cells[3].value;
+			}
+		}
+
+		text["items"] = items_list;
+
+		jsonData = JSON.stringify(text);
+
+		var saveMessage = "Hi. This is the backend. This JSON was received and will be saved:\n\n";
+		saveMessage += jsonData + "\n\n";
+		saveMessage += "Thank You!"
+		alert(saveMessage);
+
+	}
+
+	else {
+		alert("Could not save. Incomplete data.");
+		exit;		
+	}
+
 
 }
 
